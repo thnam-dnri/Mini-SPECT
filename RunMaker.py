@@ -33,7 +33,7 @@ for x_off in xy_range:
                 # This command adds (x_off, y_off, z_off) to the phantom’s default (0,0,200 mm)
                 f.write(f"/simulation/offset {x_str} {y_str} {z_str} mm\n")
                 f.write("/run/initialize\n")
-                f.write("/run/beamOn 1000\n")
+                f.write("/run/beamOn 100000\n")
 
             print(f"  Created {filename}")
             file_count += 1
