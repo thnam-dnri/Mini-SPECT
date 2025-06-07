@@ -5,7 +5,7 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 #include "G4ThreeVector.hh"
-
+#include "G4RandomDirection.hh"
 #include <cmath>
 
 // ── Geometry definitions (matching phantom construction) ──
@@ -68,6 +68,12 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     }
 
     fParticleGun->SetParticlePosition(pos);
-    fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.0, 0.0, -1.0));
+// Sample isotropic direction in the lower hemisphere (Z < 0)
+G4ThreeVector dir;
+do {
+    dir = G4RandomDirection();  // uniformly on full sphere
+} while (dir.z() > 0);          // reject if not in lower hemisphere
+
+fParticleGun->SetParticleMomentumDirection(dir);
     fParticleGun->GeneratePrimaryVertex(anEvent);
 }
