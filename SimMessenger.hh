@@ -4,7 +4,7 @@
 #include "G4UImessenger.hh"
 #include "G4UIcmdWith3Vector.hh"
 #include "G4ThreeVector.hh"
-
+#include "G4UIcmdWith3VectorAndUnit.hh"
 class DetectorConstruction;
 class PrimaryGeneratorAction;
 
@@ -19,6 +19,7 @@ private:
   DetectorConstruction*        fDetector;
   PrimaryGeneratorAction*      fGenerator;
   G4UIcmdWith3Vector*          fOffsetCmd;
+  G4UIcmdWith3VectorAndUnit*          fRotateCmd;
 };
 
 #endif // SIM_MESSENGER_H

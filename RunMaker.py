@@ -8,11 +8,11 @@ os.makedirs(output_dir, exist_ok=True)
 
 # 1) XY scan: −8.40 mm to +8.40 mm in 1.68 mm steps
 xy_step = 1.68
-xy_range = [i * xy_step for i in range(-5, 6)]  # 11 values: [−8.40, −6.72, …, 0.00, …, +6.72, +8.40]
+xy_range = [i * xy_step for i in range(-20, 21)]  # 11 values: [−8.40, −6.72, …, 0.00, …, +6.72, +8.40]
 
 # 2) Z‐offset scan: from −50 mm to +50 mm in 10 mm steps
 #    (since phantom’s “base” Z is +200 mm, this yields final Z = 150 → 250 mm)
-z_offsets = [i * 10.0 for i in range(-5, 6)]  # [−50, −40, −30, −20, −10, 0, +10, +20, +30, +40, +50]
+z_offsets = [i * 10.0 for i in range(8, 9)]
 
 file_count = 0
 

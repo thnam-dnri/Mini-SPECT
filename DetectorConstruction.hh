@@ -17,7 +17,8 @@ public:
     /// Set an offset to translate the phantom in (x, y, z). 
     /// Default was {0, 0, 20*cm}.
     void SetPhantomOffset(const G4ThreeVector& off) { fPhantomOffset = off; }
-	const G4ThreeVector& GetPhantomOffset() const { return fPhantomOffset; }
+    void SetPhantomRotation(const G4ThreeVector& rot) { fPhantomRotation = rot; }
+    const G4ThreeVector& GetPhantomOffset() const { return fPhantomOffset; }
     /// Build the world, phantom, detector, and collimator.
     G4VPhysicalVolume* Construct() override;
 
@@ -34,6 +35,7 @@ private:
 
     // --- User‐configurable offset of the phantom (in world coordinates) ---
     G4ThreeVector    fPhantomOffset{0, 0, 20*cm};
+    G4ThreeVector    fPhantomRotation{0, 0, 0};  // (deg)
 
     // --- Predefined materials (if you want to cache them) ---
     G4Material* air;

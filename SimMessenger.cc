@@ -21,6 +21,13 @@ SimMessenger::SimMessenger(DetectorConstruction* det,
     fOffsetCmd->SetParameterName("X", "Y", "Z", false);
     // Note: SetUnitCategory removed for compatibility
     fOffsetCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
+    // rotation command: takes 3 Euler angles (degrees)
+    fRotateCmd = new G4UIcmdWith3VectorAndUnit("/simulation/rotate", this);
+    fRotateCmd->SetGuidance("Set phantom rotation (deg) about X, Y, Z");
+    fRotateCmd->SetParameterName("rotX","rotY","rotZ", false, false);
+    fRotateCmd->SetUnitCandidates("deg rad mrad");
+    fRotateCmd->SetDefaultUnit("deg");
+    fRotateCmd->AvailableForStates(G4State_PreInit, G4State_Idle);
 }
 
 SimMessenger::~SimMessenger()
@@ -34,5 +41,9 @@ void SimMessenger::SetNewValue(G4UIcommand* cmd, G4String newValue)
         G4ThreeVector off = fOffsetCmd->GetNew3VectorValue(newValue);
         fDetector->SetPhantomOffset(off);
         fGenerator->SetSourceOffset(off);
+    }
+    else if ( cmd == fRotateCmd ) {
+        G4ThreeVector rot = fRotateCmd->GetNew3VectorValue(newValue);
+        fDetector->SetPhantomRotation(rot);
     }
 }
